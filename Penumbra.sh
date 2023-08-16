@@ -1,19 +1,9 @@
-#!/bin/bash
+sudo apt-get install build-essential pkg-config libssl-dev clang git-lfs
 
+sudo dnf install openssl-devel clang git cargo rustfmt git-lfs
 
-function source_git {
-  if [ ! -d $HOME/penumbra/ ]; then
-    git clone https://github.com/penumbra-zone/penumbra
-  fi
-  mkdir -p $HOME/penumbra/target/release/
-  sudo chmod +x $HOME/penumbra/target/release/pcli
-  sudo cp $HOME/penumbra/target/release/pcli /usr/bin/pcli
-  cd $HOME/penumbra
-  git fetch
-  git checkout $version && cargo update
-}
+git clone https://github.com/penumbra-zone/penumbra
 
+cd penumbra && git fetch && git checkout v0.58.0
 
-
-export version="v0.58.0"
-source_git
+cargo build --release --bin pcli
