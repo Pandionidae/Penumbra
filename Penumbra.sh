@@ -1,7 +1,3 @@
-#!/bin/bash
-
-
-
 function source_git {
   if [ ! -d $HOME/penumbra/ ]; then
     git clone https://github.com/penumbra-zone/penumbra
@@ -19,6 +15,7 @@ function wget_bin_pcli {
   sudo chmod +x $HOME/penumbra/target/release/pcli
   sudo cp $HOME/penumbra/target/release/pcli /usr/bin/pcli
 }
+
 
 function reset_wallet {
   cd $HOME/penumbra/
