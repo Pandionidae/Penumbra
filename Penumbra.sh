@@ -9,7 +9,6 @@ function source_git {
   cd $HOME/penumbra
   git reset --hard
   git fetch
-  version="v0.58.0"
   git checkout $version && cargo update
 }
 
@@ -27,7 +26,7 @@ function reset_wallet {
 }
 
 
-
+export version="v0.58.0"
 source_git
 wget_bin_pcli
 reset_wallet
