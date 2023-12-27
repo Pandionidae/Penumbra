@@ -1,9 +1,17 @@
+#!/bin/bash
+
+
+function install_tools {
+sudo apt update
+sudo apt install mc wget curl git htop netcat net-tools unzip jq build-essential ncdu tmux make cmake clang pkg-config libssl-dev protobuf-compiler -y
+  sleep 1
+}
+
 function source_git {
   if [ ! -d $HOME/penumbra/ ]; then
     git clone https://github.com/penumbra-zone/penumbra
   fi
   cd $HOME/penumbra
-  git reset --hard
   git fetch
   git checkout $version && cargo update
 }
@@ -16,14 +24,12 @@ function wget_bin_pcli {
   sudo cp $HOME/penumbra/target/release/pcli /usr/bin/pcli
 }
 
-
-function reset_wallet {
+function generate_wallet {
   cd $HOME/penumbra/
-  pcli view reset
+  mkdir -p $HOME/.local/share/penumbra-testnet-archive/
+  pcli keys generate
 }
 
-
-export version="v0.58.0"
-source_git
+export version="v0.64.0"
+install_tools
 wget_bin_pcli
-reset_wallet
